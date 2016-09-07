@@ -1,5 +1,13 @@
 FROM gianebao/bitbucket-pipeline-go-mysql
 
+ENV TZ Asia/Singapore
+
+ENV APP_PORT 443
+ENV APP_REF_DOCS http://0.0.0.0:8081
+ENV APP_ACCESS_LOG /log/access.log
+ENV APP_ENV TESTING
+ENV APP_NAME myapp
+
 RUN \
  apt-get update && apt-get -y upgrade &&\
  apt-get -y install unzip groff
@@ -13,3 +21,7 @@ RUN \
 RUN \
  curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest &&\
  chmod 755 /usr/local/bin/ecs-cli
+
+ADD scripts /scripts
+RUN chmod -R 755 /scripts
+ENV PATH $PATH:/scripts
