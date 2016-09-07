@@ -7,6 +7,7 @@ ENV APP_REF_DOCS http://0.0.0.0:8081
 ENV APP_ACCESS_LOG /log/access.log
 ENV APP_ENV TESTING
 ENV APP_NAME myapp
+ENV REPO_OWNER github.com/someone
 
 RUN \
  apt-get update && apt-get -y upgrade &&\

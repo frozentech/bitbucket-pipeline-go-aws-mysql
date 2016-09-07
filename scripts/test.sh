@@ -11,7 +11,7 @@ if [ ! -z ${1+x} ]; then
   cd $1
 fi
 
-GOPATH_WORKDIR=$GOPATH/src/bitbucket.org/matchmove/$APP_NAME
+GOPATH_WORKDIR=$GOPATH/src/$REPO_OWNER/$APP_NAME
 
 # create directories
 mkdir -p  $GOPATH_WORKDIR &&\
