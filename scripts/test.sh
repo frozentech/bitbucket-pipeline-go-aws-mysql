@@ -30,7 +30,7 @@ cp ./db/migrations/*.sql /db/migrations
 # create and deploy database
 cd / &&\
  /etc/init.d/mysql start &&\
- mysql --user=root --password=$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE $APP_NAME;"
+ mysql --user=root --password=$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE `$APP_NAME`;"
 
 echo "Execting goose.." &&\
  goose -env default up
