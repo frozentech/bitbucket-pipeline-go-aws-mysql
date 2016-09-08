@@ -4,7 +4,8 @@
 set -e
 
 export APP_ENV=TESTING
-export DB_OPEN="root:$MYSQL_ROOT_PASSWORD@tcp(localhost:3306)/$APP_NAME"
+export DB_NAME=test_app
+export DB_OPEN="root:$MYSQL_ROOT_PASSWORD@tcp(localhost:3306)/$DB_NAME"
 
 # must be run inside the project. this is a hack for codeship
 if [ ! -z ${1+x} ]; then
@@ -30,7 +31,7 @@ cp ./db/migrations/*.sql /db/migrations
 # create and deploy database
 cd / &&\
  /etc/init.d/mysql start &&\
- mysql --user=root --password=$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE `$APP_NAME`;"
+ mysql --user=root --password=$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE $DB_NAME;"
 
 echo "Execting goose.." &&\
  goose -env default up
