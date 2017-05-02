@@ -1,8 +1,15 @@
-FROM golang:latestom>
-
+FROM golang:latest
 ENV MYSQL_MAJOR 5.7
 ENV MYSQL_ROOT_PASSWORD root
 ENV GOOSE_DIR /db
+ENV TZ Asia/Singapore
+ENV APP_PORT 443
+ENV APP_REF_DOCS http://0.0.0.0:8081
+ENV APP_ACCESS_LOG /log/access.log
+ENV APP_ENV TESTING
+ENV APP_NAME myapp
+ENV REPO_OWNER github.com/someone
+ENV PATH $PATH:/scripts
 
 # Update and Fix Language
 RUN \
@@ -33,15 +40,6 @@ RUN \
 # Install Goose
 RUN go get bitbucket.org/liamstask/goose/cmd/goose
 
-ENV TZ Asia/Singapore
-
-ENV APP_PORT 443
-ENV APP_REF_DOCS http://0.0.0.0:8081
-ENV APP_ACCESS_LOG /log/access.log
-ENV APP_ENV TESTING
-ENV APP_NAME myapp
-ENV REPO_OWNER github.com/someone
-
 RUN \
  apt-get update && apt-get -y upgrade &&\
  apt-get -y install unzip groff
@@ -58,4 +56,3 @@ RUN \
 
 ADD scripts /scripts
 RUN chmod -R 755 /scripts
-ENV PATH $PATH:/scripts
